@@ -41,7 +41,7 @@ To run this project, you will need to add the following to your config file
   "host": "​192.168.0.1",
   "port": "25565",
   "version": "1.17.1",
-  "auth": "mojang" // Leave blank for microsoft
+  "auth": "mojang"
 }
 ```
 
