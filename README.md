@@ -17,7 +17,7 @@ Control your Minecraft player using Mineflayer & discord.js
 
 
 
-## Environment Variablesenvironment variables
+## Environment Variables
 
 To run this project, you will need to add the following to your config file
 
