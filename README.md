@@ -29,20 +29,24 @@ To run this project, you will need to add the following to your config file
 `port`
 `version`
 `auth`
-
-
+`eventLog`
+`chatLog`
+`debug`
 
 ## Example Config
 
 ```json
 {
   "token": "ODgzNTI4NTk4NjQyODkyOTAw.YTLQIQ.SCSOPE87JedYez7VVk1fw1z_ocU",
-  "username": "email@example.com", // If password is blank change this to a username e.g OBNinjaa and not an email
-  "password": "Password123", // Leave blank if usng offline server
-  "host": "​192.168.0.1",
+  "username": "email@example.com", // Change this to a username for cracked servers
+  "password": "Password123", // Leave blank if you're using a username instead of an email
+  "host": "192.168.0.1",
   "port": "25565",
   "version": "1.17.1",
-  "auth": "mojang"
+  "auth": "mojang",
+  "eventLog": "", // Events Webhook
+  "chatLog": "", // Chat logs Webhook
+  "debug": "" // Debug Webhook
 }
 ```
 
