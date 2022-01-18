@@ -11,7 +11,8 @@ class InfoCommand extends Command {
       cooldown: 6000,
       ratelimit: 3,
       description: {
-        content: "This command outputs basic information about the bot.",
+        content:
+          "This command outputs basic information about the bot.",
       },
     });
   }
@@ -20,11 +21,16 @@ class InfoCommand extends Command {
     const embed = new MessageEmbed();
     {
       embed;
-      embed.setTitle(`__**Basic Information For: ${bot.player.username}**__`);
-      embed.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      embed.setTitle(
+        `__**Basic Information For: ${bot.player.username}**__`
+      );
+      embed.setThumbnail(
+        `https://crafatar.com/avatars/${bot.player.uuid}`
+      );
       embed.addField("Ping", `${bot.player.ping}`);
       embed.addField("Health", `${bot.health}`);
       embed.addField("Version", `${bot.version}`);
+      embed.addField("UUID", `${bot.player.uuid}`);
       embed.setColor("#c36ba4");
       embed.setTimestamp();
     }

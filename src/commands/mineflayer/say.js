@@ -22,21 +22,32 @@ class SayCommand extends Command {
         {
           id: "string",
           match: "rest",
+          prompt: {
+            start: "What message do you want to send?",
+            retry: "Invalid message.",
+          },
         },
       ],
     });
   }
-
   async exec(message, args) {
+    // if args.string starts with / then deny
+    if (args.string.startsWith("/")) {
+      return message.channel.send(
+        "You can't send a command to the minecraft server."
+      );
+    }
     const errorRes = new MessageEmbed();
     {
       errorRes;
       errorRes.setTitle(`__**Missing Argument**__`);
-      errorRes.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      errorRes.setThumbnail(
+        `https://crafatar.com/avatars/${bot.player.uuid}`
+      );
       errorRes.setDescription(
         stripIndents`You forgot to enter the message you want to send.\nUse **c.help say** for the correct usage`
       );
-      errorRes.setColor("#c36ba4");
+      errorRes.setColor("#c36b6b");
       errorRes.setTimestamp();
     }
 
@@ -52,7 +63,7 @@ class SayCommand extends Command {
       messageSend.setDescription(
         stripIndents`**AUTHOR:** ${message.author.username}\n**MESSAGE:** ${args.string}`
       );
-      messageSend.setColor("#6bc36c");
+      messageSend.setColor("#c36ba4");
       messageSend.setTimestamp();
     }
     message.channel.send(messageSend);

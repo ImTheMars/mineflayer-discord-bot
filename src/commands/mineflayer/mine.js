@@ -3,7 +3,8 @@ const { stripIndents } = require("common-tags");
 const { MessageEmbed } = require("discord.js");
 const { bot } = require("../../index");
 
-const collectBlock = require("mineflayer-collectblock").plugin;
+const collectBlock =
+  require("mineflayer-collectblock").plugin;
 bot.loadPlugin(collectBlock);
 
 let mcData;
@@ -20,8 +21,9 @@ class MineCommand extends Command {
       cooldown: 6000,
       ratelimit: 3,
       description: {
-        content: "This makes the bot auto mine blocks for you.",
-        usage: "[X, Y, Z]",
+        content:
+          "This makes the bot auto mine blocks for you.",
+        usage: "[block_name]",
         examples: ["diamond_ore", "coal_ore"],
       },
       args: [
@@ -39,11 +41,13 @@ class MineCommand extends Command {
     {
       errorRes;
       errorRes.setTitle(`__**Missing Argument**__`);
-      errorRes.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      errorRes.setThumbnail(
+        `https://crafatar.com/avatars/${bot.player.uuid}`
+      );
       errorRes.setDescription(
         stripIndents`You forgot to enter the block name. Use **c.help mine** for the correct usage`
       );
-      errorRes.setColor("#c36ba4");
+      errorRes.setColor("#c36b6b");
       errorRes.setTimestamp();
     }
 
@@ -63,7 +67,7 @@ class MineCommand extends Command {
         errorType.setDescription(
           stripIndents`The block **${type}** doesn't exist or you typed it in wrong.`
         );
-        errorType.setColor("#c36ba4");
+        errorType.setColor("#c36b6b");
         errorType.setTimestamp();
       }
       message.channel.send(errorType);
@@ -72,7 +76,7 @@ class MineCommand extends Command {
 
     const blocks = bot.findBlocks({
       matching: blockType.id,
-      maxDistance: 64,
+      maxDistance: 1000,
       count: 20,
     });
 
@@ -87,7 +91,7 @@ class MineCommand extends Command {
         errorFind.setDescription(
           stripIndents`Unable to find the block you are looking for.`
         );
-        errorFind.setColor("#c36ba4");
+        errorFind.setColor("#c36b6b");
         errorFind.setTimestamp();
       }
       message.channel.send(errorFind);
@@ -102,7 +106,9 @@ class MineCommand extends Command {
     const blockFound = new MessageEmbed();
     {
       blockFound;
-      blockFound.setTitle(`__**Blocks Found: ${targets.length}**__`);
+      blockFound.setTitle(
+        `__**Blocks Found: ${targets.length}**__`
+      );
       blockFound.setThumbnail(
         `https://crafatar.com/avatars/${bot.player.uuid}`
       );
@@ -123,8 +129,10 @@ class MineCommand extends Command {
           cmdError.setThumbnail(
             `https://crafatar.com/avatars/${bot.player.uuid}`
           );
-          cmdError.setDescription(stripIndents`${err.message}`);
-          cmdError.setColor("#c36ba4");
+          cmdError.setDescription(
+            stripIndents`${err.message}`
+          );
+          cmdError.setColor("#c36b6b");
           blockFound.setTimestamp();
         }
         message.channel.send(cmdError);
@@ -133,14 +141,14 @@ class MineCommand extends Command {
         const doneMining = new MessageEmbed();
         {
           doneMining;
-          doneMining.setTitle(`__**Error**__`);
+          doneMining.setTitle(`__**Success**__`);
           doneMining.setThumbnail(
             `https://crafatar.com/avatars/${bot.player.uuid}`
           );
           doneMining.setDescription(
             stripIndents`All the blocks have been collected. Exacute the command again if you would like me to collect more.`
           );
-          doneMining.setColor("#6bc36c");
+          doneMining.setColor("#c36ba4");
           blockFound.setTimestamp();
         }
         message.channel.send(doneMining);

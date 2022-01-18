@@ -15,7 +15,7 @@ class Ready extends Listener {
     setInterval(
       () =>
         this.client.user.setActivity(
-          `c.help | Minecraft Automated Bot! | dsc.gg/mineflayer`,
+          `${this.client.guilds.cache.size} servers | ${this.client.users.cache.size} users`,
           {
             type: "WATCHING",
           }
@@ -35,7 +35,6 @@ class Ready extends Listener {
       )
     );
     console.log();
-    // Don't Change This
     console.log(colors.green(" Mineflayer Discord Bot"));
     console.log(colors.green(" Created by OBNinjaa"));
     console.log(colors.green(" dsc.gg/mineflayer"));

@@ -1,7 +1,7 @@
 {
-  "name": "mineflayer-discord-bot",
-  "version": "1.0.0",
-  "description": "control your mineflayer bot using discord.js",
+  "name": "mineflayer-bot",
+  "version": "1.0.2",
+  "description": "control your mineflayer bot via discord",
   "main": "src/index.js",
   "dependencies": {
     "colors": "^1.4.0",
@@ -18,6 +18,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "mineflayer",
+    "discord.js"
+  ],
   "author": "OBNinjaa",
   "license": "ISC"
 }

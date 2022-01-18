@@ -11,12 +11,19 @@ class ReloadCommand extends Command {
       typing: true,
       quoted: false,
       description: {
-        content: "Reloads a singular command or all commands.",
+        content:
+          "Reloads a singular command or all commands.",
         permissions: [],
       },
       args: [
         {
           id: "commandID",
+          type: "string",
+          match: "rest",
+          prompt: {
+            start: "What command do you want to reload?",
+            retry: "Invalid command.",
+          },
         },
       ],
     });
@@ -34,7 +41,9 @@ class ReloadCommand extends Command {
       {
         embed;
         embed.setTitle(`__**Reloaded All Commands**__`);
-        embed.setThumbnail(this.client.user.displayAvatarURL());
+        embed.setThumbnail(
+          this.client.user.displayAvatarURL()
+        );
         embed.setDescription(
           stripIndents`Successfully reloaded all commands for **${this.client.user.username}**.`
         );
@@ -52,7 +61,9 @@ class ReloadCommand extends Command {
     {
       embed;
       embed.setTitle(`__**Reloaded All Command**__`);
-      embed.setThumbnail(this.client.user.displayAvatarURL());
+      embed.setThumbnail(
+        this.client.user.displayAvatarURL()
+      );
       embed.setDescription(
         stripIndents`Successfully reloaded the **${args.commandID}** command for **${this.client.user.username}**.`
       );

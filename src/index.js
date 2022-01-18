@@ -9,7 +9,15 @@ const mineflayer = require("mineflayer");
 console.clear();
 
 const settings = require("./config/config.json");
-const { token, username, password, host, port, version, auth } = settings;
+const {
+  token,
+  username,
+  password,
+  host,
+  port,
+  version,
+  auth,
+} = settings;
 
 const { config } = require("dotenv");
 const { join } = require("path");

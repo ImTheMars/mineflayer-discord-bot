@@ -34,12 +34,15 @@ class HelpCommand extends Command {
         .setColor("#c36ba4")
         .addField(
           "❯ Description:",
-          command.description.content || "No Description provided"
+          command.description.content ||
+            "No Description provided"
         )
         .addField(
           "❯ Usage:",
           `\`${command.aliases[0]} ${
-            command.description.usage ? command.description.usage : ""
+            command.description.usage
+              ? command.description.usage
+              : ""
           }\``
         );
 
@@ -49,10 +52,15 @@ class HelpCommand extends Command {
           `\`${command.aliases.join("`, `")}\``
         );
       }
-      if (command.description.examples && command.description.examples.length) {
+      if (
+        command.description.examples &&
+        command.description.examples.length
+      ) {
         embed.addField(
           "❯ Example:",
-          `\`${command.aliases[0]} ${command.description.examples.join(
+          `\`${
+            command.aliases[0]
+          } ${command.description.examples.join(
             `\`\n\`${command.aliases[0]} `
           )}\``
         );
@@ -74,7 +82,9 @@ class HelpCommand extends Command {
 
       for (const category of this.handler.categories.values()) {
         embed.addField(
-          `❯ ${category.id.replace(/(\b\w)/gi, (lc) => lc.toUpperCase())}:`,
+          `❯ ${category.id.replace(/(\b\w)/gi, (lc) =>
+            lc.toUpperCase()
+          )}:`,
           `${category
             .filter((cmd) => cmd.aliases.length > 0)
             .map((cmd) => `\`${cmd.aliases[0]}\``)
@@ -82,7 +92,7 @@ class HelpCommand extends Command {
         );
       }
       embed.addField(`__Quick Links__`, [
-        `[**GitHub**](https://github.com/OBNinjaa)`,
+        `[**GitHub Repository**](https://github.com/OBNinjaa)`,
         `[**Discord Server**](https://discord.gg/a9sNYKVXCU)`,
       ]);
     }

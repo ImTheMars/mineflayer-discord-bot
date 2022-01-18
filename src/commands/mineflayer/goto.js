@@ -3,8 +3,12 @@ const { stripIndents } = require("common-tags");
 const { MessageEmbed } = require("discord.js");
 const { bot } = require("../../index");
 
-const { pathfinder, Movements } = require("mineflayer-pathfinder");
-const { GoalBlock } = require("mineflayer-pathfinder").goals;
+const {
+  pathfinder,
+  Movements,
+} = require("mineflayer-pathfinder");
+const { GoalBlock } =
+  require("mineflayer-pathfinder").goals;
 
 bot.loadPlugin(pathfinder);
 
@@ -44,62 +48,84 @@ class SayCommand extends Command {
     {
       xCoord;
       xCoord.setTitle(`__**Missing Argument**__`);
-      xCoord.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      xCoord.setThumbnail(
+        `https://crafatar.com/avatars/${bot.player.uuid}`
+      );
       xCoord.setDescription(
         stripIndents`You for got to enter the **X** coordinate.`
       );
-      xCoord.setColor("#c36ba4");
+      xCoord.setColor("#c36b6b");
       xCoord.setTimestamp();
     }
     const yCoord = new MessageEmbed();
     {
       yCoord;
       yCoord.setTitle(`__**Missing Argument**__`);
-      yCoord.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      yCoord.setThumbnail(
+        `https://crafatar.com/avatars/${bot.player.uuid}`
+      );
       yCoord.setDescription(
         stripIndents`You for got to enter the **Y** coordinate.`
       );
-      yCoord.setColor("#c36ba4");
+      yCoord.setColor("#c36b6b");
       yCoord.setTimestamp();
     }
     const zCoord = new MessageEmbed();
     {
       zCoord;
       zCoord.setTitle(`__**Missing Argument**__`);
-      zCoord.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      zCoord.setThumbnail(
+        `https://crafatar.com/avatars/${bot.player.uuid}`
+      );
       zCoord.setDescription(
         stripIndents`You for got to enter the **Z** coordinate.`
       );
-      zCoord.setColor("#c36ba4");
+      zCoord.setColor("#c36b6b");
       zCoord.setTimestamp();
     }
     if (!args.x) return message.channel.send(xCoord);
     if (!args.y) return message.channel.send(yCoord);
     if (!args.z) return message.channel.send(zCoord);
 
-    bot.on("path_update", (r) => {
-      const nodesPerTick = ((r.visitedNodes * 50) / r.time).toFixed(2);
-    });
+    const maxDistance = 1000000;
+    const distance = bot.entity.position.distanceTo(args);
+    if (distance > maxDistance) {
+      const tooFar = new MessageEmbed();
+      {
+        tooFar;
+        tooFar.setTitle(`__**Too Far Away**__`);
+        tooFar.setThumbnail(
+          `https://crafatar.com/avatars/${bot.player.uuid}`
+        );
+        tooFar.setDescription(
+          stripIndents`The bot can't move to a location that is too far away. The maximum distance is **${maxDistance}** blocks. You are **${distance}** blocks away.`
+        );
+        tooFar.setColor("#c36ba4");
+        tooFar.setTimestamp();
+      }
+      return message.channel.send(tooFar);
+    }
 
     const mcData = require("minecraft-data")(bot.version);
     const defaultMove = new Movements(bot, mcData);
     bot.pathfinder.setMovements(defaultMove);
-    bot.pathfinder.setGoal(new GoalBlock(args.x, args.y, args.z));
+    bot.pathfinder.setGoal(
+      new GoalBlock(args.x, args.y, args.z)
+    );
 
     const messageSend = new MessageEmbed();
     {
       messageSend;
-      messageSend.setTitle(`__**Pathfinder: ${args.x},${args.y},${args.z}**__`);
+      messageSend.setTitle(
+        `__**Pathfinder: ${args.x},${args.y},${args.z}**__`
+      );
       messageSend.setThumbnail(
         `https://crafatar.com/avatars/${bot.player.uuid}`
       );
       messageSend.setDescription(
         stripIndents`Moving towards the set coordinates.\nX: **${args.x}**\nY: **${args.y}**\nZ: **${args.z}**`
       );
-      // messageSend.addField("X:", `${args.x}`);
-      // messageSend.addField("Y:", `${args.y}`);
-      // messageSend.addField("Z:", `${args.z}`);
-      messageSend.setColor("#6bc36c");
+      messageSend.setColor("#c36ba4");
       messageSend.setTimestamp();
     }
 

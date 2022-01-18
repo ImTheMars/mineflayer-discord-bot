@@ -1,4 +1,7 @@
 const { Command } = require("discord-akairo");
+const { stripIndents } = require("common-tags");
+const { MessageEmbed } = require("discord.js");
+const { bot } = require("../../index");
 
 class Ping extends Command {
   constructor() {
@@ -16,17 +19,24 @@ class Ping extends Command {
 
   async exec(message) {
     await message.delete();
-    const msg = await message.channel.send("Pinging...");
-
-    const latency = msg.createdTimestamp - message.createdTimestamp;
-    const choices = ["Boop", "Beep"];
-    const reponse = choices[Math.floor(Math.random() * choices.length)];
-
-    msg.edit(
-      `${reponse} - **Bot Latency**: \`${latency}ms\`, **API Latency**: \`${Math.round(
-        this.client.ws.ping
-      )}ms\``
-    );
+    const latency =
+      message.createdTimestamp - message.createdTimestamp;
+    const ping = new MessageEmbed();
+    {
+      ping;
+      ping.setTitle(`__**Latency Check**__`);
+      ping.setThumbnail(
+        this.client.user.displayAvatarURL()
+      );
+      ping.setDescription(
+        stripIndents`**Bot Latency**: \`${latency}ms\`\n **API Latency**: \`${Math.round(
+          this.client.ws.ping
+        )}ms\``
+      );
+      ping.setColor("#c36ba4");
+      ping.setTimestamp();
+    }
+    message.channel.send(ping);
   }
 }
 
