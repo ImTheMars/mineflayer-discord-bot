@@ -3,7 +3,7 @@
 
 Control your Minecraft player using Mineflayer & discord.js
 
-[![AltText](https://discordapp.com/api/guilds/883397209306038272/widget.png?style=banner2)](https://discord.gg/a9sNYKVXCU)
+[![AltText](https://discordapp.com/api/guilds/883397209306038272/widget.png?style=banner2)](https://discord.gg/numgPDvq5Q)
 
 
 
