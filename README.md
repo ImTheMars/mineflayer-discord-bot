@@ -14,6 +14,7 @@ Control your Minecraft player using Mineflayer & discord.js
 - Message
 - Statistics
 - PVP
+- Kit
 
 
 
