@@ -6,23 +6,18 @@ const {
 } = require("discord-akairo");
 const mineflayer = require("mineflayer");
 
-console.clear();
-
 const settings = require("./config/config.json");
-const {
-  token,
-  username,
-  password,
-  host,
-  port,
-  version,
-  auth,
-} = settings;
-
+const { token, username, password, host, port, version, auth } = settings;
+const colors = require("colors");
 const { config } = require("dotenv");
 const { join } = require("path");
 
 config();
+
+if (!host || !username || !password || !port || !version || !auth) {
+  console.log("[ERROR] Please fill out config.json".red);
+  process.exit(1);
+}
 
 const bot = mineflayer.createBot({
   host: host,
@@ -31,6 +26,7 @@ const bot = mineflayer.createBot({
   port: port || null,
   version: version,
   auth: auth,
+  verbose: true,
 });
 
 module.exports = { bot };

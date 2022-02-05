@@ -3,70 +3,70 @@ const { stripIndents } = require("common-tags");
 const { MessageEmbed } = require("discord.js");
 const { bot } = require("../../index");
 
-class SayCommand extends Command {
+class KitCommand extends Command {
   constructor() {
-    super("say", {
-      aliases: ["say", "echo"],
+    super("kit", {
+      aliases: ["kit"],
       channel: "guild",
       category: "Mineflayer",
-      cooldown: 6000,
-      ownerOnly: true,
-      ratelimit: 3,
+      cooldown: 3.6e6,
+      ratelimit: 1,
       description: {
-        content:
-          "This lets you send a message to whatever minecraft server the bot is in.",
-        usage: "[my custom message]",
-        examples: ["hello world", "dsc.gg/wolkig"],
+        content: "This command lets users get kits from the minecraft server.",
+        usage: "[username]",
+        examples: ["OBNinjaa"],
       },
       args: [
         {
-          id: "string",
+          id: "username",
           match: "rest",
           prompt: {
-            start: "What message do you want to send?",
-            retry: "Invalid message.",
+            start: "What is your username?",
+            retry: "Invalid username.",
           },
         },
       ],
     });
   }
   async exec(message, args) {
-    if (args.string.startsWith("/")) {
-      return message.channel.send(
-        "You can't send a command to the minecraft server."
-      );
-    }
+    // embed
     const errorRes = new MessageEmbed();
     {
       errorRes;
       errorRes.setTitle(`__**Missing Argument**__`);
       errorRes.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
       errorRes.setDescription(
-        stripIndents`You forgot to enter the message you want to send.\nUse **c.help say** for the correct usage`
+        stripIndents`You forgot to enter a username.\nUse **c.help kit** for the correct usage`
       );
       errorRes.setColor("#c36b6b");
       errorRes.setTimestamp();
     }
 
-    if (!args.string) return message.channel.send(errorRes);
+    if (!args.username) return message.channel.send(errorRes);
     await message.delete();
     const messageSend = new MessageEmbed();
     {
       messageSend;
-      messageSend.setTitle(`__**Message Sent**__`);
+      messageSend.setTitle(`__**Kit Request For: ${args.username}**__`);
       messageSend.setThumbnail(
         `https://crafatar.com/avatars/${bot.player.uuid}`
       );
       messageSend.setDescription(
-        stripIndents`**AUTHOR:** ${message.author.username}\n**MESSAGE:** ${args.string}`
+        `Successfully gave the kit to ${args.username}`
       );
-      messageSend.setColor("#c36ba4");
+      messageSend.setColor("#c36b6b");
       messageSend.setTimestamp();
     }
     message.channel.send(messageSend);
-
-    bot.chat(`${args.string}`);
+    bot.chat(`/tpa ${args.username}`);
+    bot.chat(
+      `/msg ${args.username} Please wait for the bot to do it's thing. If you kill it then you will be blacklisted from using this command.`
+    );
+    setTimeout(() => {
+      bot.chat(`/msg ${args.username} Thanks for using me!`);
+      bot.chat(`/kill`);
+    }, 13000);
   }
 }
 
-module.exports = SayCommand;
+module.exports = KitCommand;

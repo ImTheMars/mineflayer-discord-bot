@@ -1,29 +1,41 @@
 const { Webhook } = require("discord-webhook-node");
 const { bot } = require("../../index");
 const settings = require("../../config/config.json");
-const { chatLog, eventLog, debug } = settings;
+const { chatLog, eventLog, debugLog } = settings;
+const colors = require("colors");
 
 const chat = new Webhook(chatLog);
 const event = new Webhook(eventLog);
+const debug = new Webhook(debugLog);
 
 if (!event || !chat || !debug) {
-  console.log("Please set up the webhooks in config.json");
+  console.log("[ERROR] Please set up the webhooks in config.json".red);
 }
 
 bot.on("chat", (username, message) => {
   if (username === bot.username) return;
   if (message.includes("http")) return;
-  chat.send(`__**[${username}]**__ **${message}**`);
+  chat.send(`**[${username}]** ${message}`);
+  console.log(`[${username}] ${message}`.magenta);
 });
 
-bot.on("join", (user) => {
-  chat.send(`**${user.username}** has joined the server!`);
+bot.on("playerJoined", (player) => {
+  if (player.username === bot.username) return;
+  event.send(`**[${player.username}]** has joined the server`);
+  console.log(`[${player.username}] has joined the server`.green);
 });
 
-bot.on("leave", (user) => {
-  chat.send(`**${user.username}** has left the server!`);
+bot.on("playerLeft", (player) => {
+  if (player.username === bot.username) return;
+  event.send(`**[${player.username}]** has left the server`);
+  console.log(`${player.username} has left the server`.grey);
 });
 
 bot.on("debug", (info) => {
-  debug.send(`**[DEBUG]** ${info}`);
+  debug.send(`**[DEBUG]** ${info}`.yellow);
+});
+
+bot.on("serverRestart", () => {
+  event.send("**[SERVER]** has restarted");
+  console.log("[SERVER] has restarted".grey);
 });

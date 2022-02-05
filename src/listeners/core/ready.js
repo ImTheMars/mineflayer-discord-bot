@@ -1,6 +1,5 @@
 const { Listener } = require("discord-akairo");
 var colors = require("colors");
-var figlet = require("figlet");
 
 class Ready extends Listener {
   constructor() {
@@ -22,22 +21,12 @@ class Ready extends Listener {
         ),
       15000
     );
+    console.clear();
     console.log();
-    console.log(
-      colors.yellow(
-        figlet.textSync(" Cloudy", {
-          font: "colossal",
-          horizontalLayout: "default",
-          verticalLayout: "default",
-          width: 80,
-          whitespaceBreak: true,
-        })
-      )
-    );
+    console.log("Mineflayer Discord Bot".cyan);
+    console.log("Created by OBNinjaa".cyan);
+    console.log("dsc.gg/mineflayer".cyan);
     console.log();
-    console.log(colors.green(" Mineflayer Discord Bot"));
-    console.log(colors.green(" Created by OBNinjaa"));
-    console.log(colors.green(" dsc.gg/mineflayer"));
   }
 }
 

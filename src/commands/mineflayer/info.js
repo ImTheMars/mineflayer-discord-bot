@@ -11,30 +11,25 @@ class InfoCommand extends Command {
       cooldown: 6000,
       ratelimit: 3,
       description: {
-        content:
-          "This command outputs basic information about the bot.",
+        content: "This command outputs basic information about the bot.",
       },
     });
   }
 
   async exec(message) {
-    const embed = new MessageEmbed();
+    const stats = new MessageEmbed();
     {
-      embed;
-      embed.setTitle(
-        `__**Basic Information For: ${bot.player.username}**__`
-      );
-      embed.setThumbnail(
-        `https://crafatar.com/avatars/${bot.player.uuid}`
-      );
-      embed.addField("Ping", `${bot.player.ping}`);
-      embed.addField("Health", `${bot.health}`);
-      embed.addField("Version", `${bot.version}`);
-      embed.addField("UUID", `${bot.player.uuid}`);
-      embed.setColor("#c36ba4");
-      embed.setTimestamp();
+      stats;
+      stats.setTitle(`__**Basic Information For: ${bot.player.username}**__`);
+      stats.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
+      stats.addField("Ping", `${bot.player.ping}`);
+      stats.addField("Health", `${bot.health}`);
+      stats.addField("Version", `${bot.version}`);
+      stats.addField("UUID", `${bot.player.uuid}`);
+      stats.setColor("#c36ba4");
+      stats.setTimestamp();
     }
-    await message.channel.send(embed);
+    await message.channel.send(stats);
   }
 }
 

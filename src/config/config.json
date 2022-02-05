@@ -5,8 +5,8 @@
   "host": "",
   "port": "",
   "version": "",
-  "auth": "mojang",
+  "auth": "",
   "eventLog": "",
   "chatLog": "",
-  "debug": ""
+  "debugLog": ""
 }

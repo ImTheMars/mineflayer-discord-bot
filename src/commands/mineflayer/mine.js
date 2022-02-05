@@ -3,8 +3,7 @@ const { stripIndents } = require("common-tags");
 const { MessageEmbed } = require("discord.js");
 const { bot } = require("../../index");
 
-const collectBlock =
-  require("mineflayer-collectblock").plugin;
+const collectBlock = require("mineflayer-collectblock").plugin;
 bot.loadPlugin(collectBlock);
 
 let mcData;
@@ -21,8 +20,7 @@ class MineCommand extends Command {
       cooldown: 6000,
       ratelimit: 3,
       description: {
-        content:
-          "This makes the bot auto mine blocks for you.",
+        content: "This makes the bot auto mine blocks for you.",
         usage: "[block_name]",
         examples: ["diamond_ore", "coal_ore"],
       },
@@ -41,9 +39,7 @@ class MineCommand extends Command {
     {
       errorRes;
       errorRes.setTitle(`__**Missing Argument**__`);
-      errorRes.setThumbnail(
-        `https://crafatar.com/avatars/${bot.player.uuid}`
-      );
+      errorRes.setThumbnail(`https://crafatar.com/avatars/${bot.player.uuid}`);
       errorRes.setDescription(
         stripIndents`You forgot to enter the block name. Use **c.help mine** for the correct usage`
       );
@@ -106,9 +102,7 @@ class MineCommand extends Command {
     const blockFound = new MessageEmbed();
     {
       blockFound;
-      blockFound.setTitle(
-        `__**Blocks Found: ${targets.length}**__`
-      );
+      blockFound.setTitle(`__**Blocks Found: ${targets.length}**__`);
       blockFound.setThumbnail(
         `https://crafatar.com/avatars/${bot.player.uuid}`
       );
@@ -129,9 +123,7 @@ class MineCommand extends Command {
           cmdError.setThumbnail(
             `https://crafatar.com/avatars/${bot.player.uuid}`
           );
-          cmdError.setDescription(
-            stripIndents`${err.message}`
-          );
+          cmdError.setDescription(stripIndents`${err.message}`);
           cmdError.setColor("#c36b6b");
           blockFound.setTimestamp();
         }
