@@ -14,7 +14,7 @@ const { join } = require("path");
 
 config();
 
-if (!host || !username || !password || !port || !version || !auth) {
+if (!host || !username || !password || !version || !auth) {
   console.log("[ERROR] Please fill out config.json".red);
   process.exit(1);
 }
