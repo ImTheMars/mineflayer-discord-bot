@@ -16,9 +16,6 @@ Control your Minecraft player using Mineflayer & discord.js
 - PVP
 - Kit
 
-
-
-
 ## Environment Variables
 
 To run this project, you will need to add the following to your config file
@@ -50,6 +47,7 @@ To run this project, you will need to add the following to your config file
   "debug": "" // Debug Webhook
 }
 ```
+- For those having issues with the bot connecting, make sure to remove the not set a port if using a domain e.g mc.hypixel.net
 
 ![Thumbnail](https://imgur.com/Jg5oTky.png)
 
